@@ -13,7 +13,7 @@ wd = os.path.dirname(__file__)
 #Set auth token. Loads from creds.key file next to script. Contents should be only "xxx/xxxxx..."
 auth = open(wd + "\\creds.key").read().splitlines()[0]
 
-#set JSON directory as a "JSON" folder one level deeper than the script.
+#set JSON directory as a "JSON" folder one level deeper than the script file.
 jsonPath = wd + "\\JSON\\"
 
 #Processing count tracker
@@ -24,7 +24,8 @@ count = 0
 #Looping through JSON files in JSON folder
 for file in glob.glob(os.path.join(jsonPath, '*.json')): #only loop through .JSON files in folder.
     count += 1 #Increment the counter
-    print ("Processing #" + str(count) + " of " + str(totalFiles))
+    print ("Processing #" + str(count) + "/" + 3
+    222str(totalFiles))
     with open(file, encoding='utf-8', mode='r') as jsonFile: #open each .json file for processing
         data = json.load(jsonFile)
         fileID = data['id'] #set file ID from JSON field
