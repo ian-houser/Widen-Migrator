@@ -152,3 +152,11 @@ cython_debug/
 #.idea/
 *.key
 *.json
+*.jpg
+*.png
+*.pdf
+*.mp4
+*.mov
+*.ai
+*.psd
+path.py
