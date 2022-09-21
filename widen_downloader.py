@@ -1,24 +1,30 @@
 #Looks through a folder of .json files generated from Widen and downloads the original file for each.
-#Version 0.20 2022/09/21 | working
+#Version 0.21 2022/09/21 | working
 #Future: update each asset's metadata in Widen to reflect that it's been migrated?
 import json
 import requests
 import shutil
 import os
 import glob
+import sys
 from pathlib import Path
 
-#Set working directory as location of the script
+#Sets working directory as location of the script
 wd = Path(os.path.realpath(os.path.dirname(__file__)))
+
+##Editable
 #Set auth token. Loads from creds.key file next to script. Contents should be only "xxx/xxxxx..."
+if os.path.exists(wd / "creds.key") == False:
+    print("No credential file found! Make a 'creds.key' file next to the script with only your Widen API token inside | 'xxx/xxxxx...'")
+    sys.exit()
 auth = open(wd / "creds.key").read().splitlines()[0]
-#The kinds of extra info to return with results in JSON form.
+#The kinds of extra info to return with results in JSON form. https://widenv2.docs.apiary.io/#reference/expands
 expands = "metadata, asset_properties, file_properties, metadata_info" 
 
-#set JSON directory as a "JSON" folder one level deeper than the script file.
+#sets JSON directory as a "JSON" folder one level deeper than the script file.
 jsonPath = wd / "JSON"
-
-destination = wd / "downloaded"  #set destination for saved file. Set to working directory
+#sets destination for saved file. Set to working directory
+destination = wd / "downloaded"
 
 #Check if our file paths exist and create them if necessary
 if os.path.exists(jsonPath / "processed") == False:

@@ -1,18 +1,24 @@
-#Will pull down .json files for every asset in an asset group (or other query) and save them to be processed later
+#Will pull down .json files for every asset in an asset group (or other query) and save them to be processed by the widen_downloader script
+#Version 0.21 2022/09/21 | working
+
 import json
 import requests
 import os
 from pathlib import Path
+import sys
 
 ##Widen Parameters (adjustable)
 query = "vcbs_cm_design_internal" #Set query from Widen to use to target files.
-expands = "metadata, asset_properties, file_properties, metadata_info" #The kinds of extra info to return with results in JSON form.
+expands = "metadata, asset_properties, file_properties, metadata_info" #The kinds of extra info to return with results in JSON form. https://widenv2.docs.apiary.io/#reference/expands
 limit = 100 #The number of results to return with each scroll. Accepts numbers 1-100.
 
 #Set working directory as location of the script (run via CMD, not opening script directly)
 wd = Path(os.path.realpath(os.path.dirname(__file__)))
 
 #Set auth token. Loads from creds.key file next to script. Contents should be only "xxx/xxxxx..."
+if os.path.exists(wd / "creds.key") == False:
+    print("No credential file found! Make a 'creds.key' file next to the script with only your Widen API token inside | 'xxx/xxxxx...'")
+    sys.exit()
 auth = open(wd / "creds.key").read().splitlines()[0]
 
 #set JSON directory as a "JSON" folder one level deeper than the script file.
@@ -46,7 +52,6 @@ def dumpJSON(items):
             json.dump(item, dumpfile, indent = 4 )
 
 def scrollSearch():
-    global count
     scrollResponse = requests.get(scrollApiURL + scrollID, headers=headers).json()
     scrollItems = scrollResponse['items']
     dumpJSON(scrollItems)
