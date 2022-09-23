@@ -30,7 +30,7 @@ if os.path.exists(jsonPath) == False:
 
 ##Don't change. Combination of above parameters used to call the API.
 apiURL = "https://api.widencollective.com/v2/assets/search?limit=" + str(limit) + "&expand=" + expands + "&query=" + query + "&scroll=true"
-scrollApiURL = "https://api.widencollective.com/v2/assets/search/scroll?limit"+ str(limit) + "&expand=" + expands + "&query=" + query + "&scroll=true&scroll_id="
+scrollApiURL = "https://api.widencollective.com/v2/assets/search/scroll?" + "&expand=" + expands + "&query=" + query + "&scroll=true&scroll_id="
 
 #GET from Widen using a query based on asset group metadata
 #Scroll through results of 100 each and save each result as a .json file in a /JSON folder
