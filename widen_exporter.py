@@ -40,11 +40,14 @@ totalFiles = response['total_count']
 print(str(totalFiles) + " total .json files will be processed.")
 scrollID = response['scroll_id']
 
+filesizeCount = 0
 count = 0
 def dumpJSON(items):
     global count
+    global filesizeCount
     for item in items:
         count += 1
+        filesizeCount += item['file_properties']['size_in_kbytes']
         filename = item['filename']
         print("Processing #" + str(count) + "/" + str(totalFiles) + " | " + str(filename))
         jsonFileName = filename + ".json" #extract just the file name from current JSON file for pathlib
@@ -61,4 +64,4 @@ dumpJSON(response['items']) #Dump first batch of .json files before the scroll s
 while count < totalFiles: #Keep calling the API to get more results until we've processed the total number of results
     scrollSearch()
 else:
-    print(str(count) + " .json files have been processed out of " + str(totalFiles))
+    print(str(count) + " .json files have been processed out of " + str(totalFiles) + " | Combined total file size (actual download files, not JSON): " + str(filesizeCount) + " kbytes")
