@@ -9,7 +9,7 @@ import sys
 
 ##Widen Parameters (adjustable)
 query = "vcbs_cm_design_internal" #Set query from Widen to use to target files.
-expands = "metadata, asset_properties, file_properties, metadata_info" #The kinds of extra info to return with results in JSON form. https://widenv2.docs.apiary.io/#reference/expands
+expands = "asset_properties,file_properties,thumbnails,metadata,metadata_info,security,status" #The kinds of extra info to return with results in JSON form. https://widenv2.docs.apiary.io/#reference/expands
 limit = 100 #The number of results to return with each scroll. Accepts numbers 1-100.
 
 #Set working directory as location of the script (run via CMD, not opening script directly)
