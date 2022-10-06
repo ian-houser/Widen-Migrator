@@ -8,7 +8,7 @@ from pathlib import Path
 import sys
 
 ##Widen Parameters (adjustable)
-query = "vcbs_cm_design_internal" #Set query from Widen to use to target files.
+query = "ag:(vcbs_cm_design_internal)" #Set query from Widen to use to target files- can use advanced searches including AND and OR. More info on advanced search queries: https://community.widen.com/collective/s/article/How-do-I-search-for-assets
 expands = "asset_properties,file_properties,thumbnails,metadata,metadata_info,security,status" #The kinds of extra info to return with results in JSON form. https://widenv2.docs.apiary.io/#reference/expands
 limit = 100 #The number of results to return with each scroll. Accepts numbers 1-100.
 
