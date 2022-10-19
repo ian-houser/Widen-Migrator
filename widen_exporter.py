@@ -1,6 +1,5 @@
 #Will pull down .json files for every asset in an asset group (or other query) and save them to be processed by the widen_downloader script
-#Version 0.3 2022/10/14 | Working | Added "Attached documents" functionality
-#Next need to organize JSON files into sub-folders based on "Field Set" aka categories
+#Version 0.31 2022/10/19 | Working | Added "subOrganize" functionality
 
 import json
 import requests
