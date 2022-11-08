@@ -31,7 +31,7 @@ auth = open(wd / "creds.key").read().splitlines()[0]
 jsonPath = wd / "JSON"
 
 #Check if our file path exists and create them if necessary
-if os.path.exists(jsonPath) == False:
+if os.path.exists(jsonPath) == False and subOrganize == False:
     os.mkdir((jsonPath))
 
 ##Don't change. Combination of above parameters used to call the API.
