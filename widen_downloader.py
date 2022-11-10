@@ -1,5 +1,5 @@
 #Looks through a folder of .json files generated from Widen and downloads the original file for each.
-#Version 0.31 2022/10/21 | working | Added functionality to update Widen metadata for each downloaded asset. Meant to assist in tracking which assets have been downloaded in Widen.
+#Version 0.32 2022/11/9 | working | Added functionality to update Widen metadata for each downloaded asset. Meant to assist in tracking which assets have been downloaded in Widen.
 
 import json
 import requests
@@ -9,6 +9,8 @@ import glob
 import sys
 from pathlib import Path
 from datetime import date #Only used to update metadata in Widen with 'migrated' date of Today()
+import time
+
 
 ##Editable
 #The kinds of extra info to return with results in JSON form. https://widenv2.docs.apiary.io/#reference/expands
@@ -45,7 +47,7 @@ count = 0
 #Looping through JSON files in JSON folder
 for file in glob.glob(os.path.join(jsonPath, '*.json')): #only loop through .JSON files in folder.
     count += 1 #Increment the counter
-    print ("Processing #", str(count), "/", str(totalFiles))
+    print ("Processing #", str(count), "/", str(totalFiles), '|', time.asctime(time.localtime()))
     with open(file, encoding='utf-8', mode='r') as jsonFile: #open each .json file for processing
         data = json.load(jsonFile)
         fileID = data['id'] #set file ID from JSON field
